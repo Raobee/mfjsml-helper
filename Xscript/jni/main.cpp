@@ -20,7 +20,7 @@ static int encryptinfo(lua_State* L)
 	const char* info=(char*)malloc((256)*(sizeof(char)));
 	switch (infoname[0])
 	{
-		case '1':info="132.232.28.134";break;
+		case '1':info="服务器地址";break;
 		
 	}
 	lua_pushstring(L, info);
