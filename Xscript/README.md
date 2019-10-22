@@ -7,3 +7,4 @@ Xscript!官网：https://www.xdow.net/
 2. lib --存放各类可加载库文件，如已编译的.so文件或Xscript!专属的.xmm插件
 3. jni --Xscript!支持运行C库，此文件夹下存放C库编译所需源码以及编译器脚本
 4. assets --附件目录，存放各类脚本可能会用到的附件
+5. ui --存放脚本的界面UI信息
