@@ -7,7 +7,7 @@ astarNetwork=require("com.astar.network") --astar网络插件，支持http,https
 --图像识别函数 --传入图像原始数据，无需编码，返回值为百度OCR引擎的JSON格式
 function OCR(image)
 	image=Base64En(image)
-	OCRToken=net.get("http://"..link.."/OCRToken.php")
+	OCRToken=''
 	local astarNetworkResult = astarNetwork.post {
 		type = "form-data",
 		url = "https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic?access_token="..OCRToken,
@@ -24,15 +24,15 @@ function OCR(image)
 end
 
 
---识别验证码并自动点击系统
+--识别验证码并自动点击系统 插件地址： https://bbs.xdow.net/thread-3518-1-2.html
 function YanZhengMa()
     if(isYanZhengMa.Main)then
 		traceprint("检测到验证码，开始识别")
         --MainPause.Pause=true
 		local astarVerifycode = require("com.astar.verifycode") {
-            platform = "LianZhong",
-            username = "qq1458096930",
-            password = "ZHOUHONGKAI1458?",
+            platform = "",
+            username = "",
+            password = "",
             timeout = 20
         }
         -- 识别屏幕指定区域
@@ -101,7 +101,7 @@ function judgeYanZhengMa()
 	end
 end
 
---日志   [作者：绢旗最爱]
+--日志   [作者：Raobee]
 function traceprint(...)
 	if(xutil.isFileExists("sdcard/com.helper.mfjsml/log")==false)then
 		os.execute("mkdir /sdcard/com.helper.mfjsml")
@@ -121,7 +121,7 @@ function traceprint(...)
 	return true
 end
 
---截图   [作者：绢旗最爱]
+--截图   [作者：Raobee]
 function CapScreen(...)
 	local arg={...}
 	if(arg[1]~=nil)then
@@ -147,7 +147,7 @@ function CapScreen(...)
 end
 
 
---找图（语法兼容按键精灵FindPic）  [作者：绢旗最爱]
+--找图（语法兼容按键精灵FindPic）  [作者：Raobee]
 --x1,y1,x2,y2搜索范围左上与右下坐标；pic_name图片名称，将图片放置在assets目录下png目录；delta_color,dir实际不起作用；isim相似度；注意！返回的是找到图像的中心坐标x,y，若未找到返回-1
 --实例： intX,intY=FindPic(100,100,300,300,"a.png",1,1,0.8)
 function FindPic(ix1,iy1,ix2,iy2,pic_name,delta_color,dir,isim)
@@ -174,7 +174,7 @@ function FindPic(ix1,iy1,ix2,iy2,pic_name,delta_color,dir,isim)
 	end
 end
 
---多点比色（语法兼容XscriptIDE图色工具）  [作者：绢旗最爱]
+--多点比色（语法兼容XscriptIDE图色工具）  [作者：Raobee]
 --使用说明：使用XscriptIDE图色工具时将多组颜色全部选中后，选择导出table，并将其保存成变量
 --实例：aa={   {x=151, y=43, c=0x1AAEE5, r=26, g=174, b=229},   {x=260, y=48, c=0x1AAEE5, r=26, g=174, b=229},   {x=515, y=59, c=0x1AAEE5, r=26, g=174, b=229},   {x=617, y=17, c=0x1AAEE5, r=26, g=174, b=229}}
 --tbl——保存的table型变量；sim——对比精度
@@ -189,7 +189,7 @@ function CmpColorXs(tbl,sim)
 	return CmpColorEx(str,sim)
 end
 
---多点比色（语法沿用按键精灵CmpColorEx）  [作者：绢旗最爱]
+--多点比色（语法沿用按键精灵CmpColorEx）  [作者：Raobee]
 --使用说明：与按键精灵CmpColorEx用法完全一样，str为颜色描述，以“,”分割多组颜色，颜色描述为X|Y|BGR，sim为相似度
 --实例：CmpColorEx("933|174|FFFFFF", 1)
 function CmpColorEx(str,sim)
@@ -221,7 +221,7 @@ function CmpColorEx(str,sim)
 	end
 end
 
---移除游戏界面通知    [作者：绢旗最爱]
+--移除游戏界面通知    [作者：Raobee]
 function RemoveNoti()
     YanZhengMa()
 	i=15
@@ -232,7 +232,7 @@ function RemoveNoti()
     end
 end
 
---选择函数库并执行    [作者：绢旗最爱]
+--选择函数库并执行    [作者：Raobee]
 function ChooseFunction(fun)
 	func=urlEncode(Base64En(fun))
 	net.curl("http://"..link.."/Xscript/getlua.php?ID="..ID.."&PASSWORD="..PASSWORD.."&LoginTime="..LoginTime.."&name="..func.."&type=lua","-o",xscript.scriptDir()..fun..".lua")
@@ -244,7 +244,7 @@ function ChooseFunction(fun)
 	os.remove("tmplua.lua")
 end
 
---根据函数名字符串执行函数    [作者：绢旗最爱]
+--根据函数名字符串执行函数    [作者：Raobee]
 function str2fun(str,...)
 	local fun =_G[str];
 	if fun then
